@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+contract ErrorHandling {
+    address public admin;
+    address public password;
+    uint256 public count;
+    uint256 public _totSupply=1000;
+
+    constructor(){
+        admin = msg.sender;
+        count = 0;
+    }
+
+    //require()
+    function setPassword(address newPassword) public  {
+        require(msg.sender == admin, "Only the admin can set a new password");
+        require(newPassword != address(0), "New password address cannot be zero address");
+        
+        password=newPassword;
+    }
+
+    //revert()
+    function onlyAdmin() public payable {
+        if (msg.sender != admin) {
+            revert("Only admin can call this action");
+        }
+        count++;
+    }
+
+    function getCount() public view returns(uint256){
+        return count;
+    }
+
+    //assert()
+    function checkAdmin() public view {
+        assert(msg.sender == admin);
+    }
+}
