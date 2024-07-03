@@ -5,7 +5,6 @@ contract ErrorHandling {
     address public admin;
     address public password;
     uint256 public count;
-    uint256 public _totSupply=1000;
 
     constructor(){
         admin = msg.sender;
